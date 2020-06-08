@@ -17,6 +17,8 @@ namespace Roommates
         {
             RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
 
+            RoommateRepository roommateRepo = new RoommateRepository(CONNECTION_STRING);
+
             //roomRepo.Delete(7);
             //roomRepo.Delete(8);
             //roomRepo.Delete(9);
@@ -50,6 +52,8 @@ namespace Roommates
 
             Console.WriteLine("-------------------------------");
             Console.WriteLine($"Added the new Room with id {bathroom.Id}");
+
+            List<Roommate> allRoommates = roommateRepo.GetAll();
         }
     }
 }
