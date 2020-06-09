@@ -198,5 +198,31 @@ namespace Roommates.Repositories
                 }
             }
         }
+
+        public void Insert(Roommate roommate)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    // These SQL parameters are annoying. Why can't we use string interpolation?
+                    // ... sql injection attacks!!!
+                    cmd.CommandText = @"INSERT INTO Roommate (FirstName, LastName, RentPortion, MoveInDate, RoomId) 
+                                         OUTPUT INSERTED.Id 
+                                         VALUES (@FirstName, @LastName, @RentPortion, @MoveInDate, @RoomId)";
+                    cmd.Parameters.AddWithValue("@FirstName", roommate.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", roommate.LastName);
+                    cmd.Parameters.AddWithValue("@RentPortion", roommate.RentPortion);
+                    cmd.Parameters.AddWithValue("@MoveInDate", roommate.MoveInDate);
+                    cmd.Parameters.AddWithValue("@RoomId", roommate.RoomId);
+                    int id = (int)cmd.ExecuteScalar();
+
+                    roommate.Id = id;
+                }
+            }
+
+            // when this method is finished we can look in the database and see the new room.
+        }
     }
 }

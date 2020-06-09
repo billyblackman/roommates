@@ -23,8 +23,8 @@ namespace Roommates
             //roomRepo.Delete(8);
             //roomRepo.Delete(9);
 
-            Console.WriteLine("Getting All Rooms:");
-            Console.WriteLine();
+            Console.WriteLine(@"Getting All Rooms:
+                ");
 
             List<Room> allRooms = roomRepo.GetAll();
 
@@ -51,9 +51,22 @@ namespace Roommates
             //Console.WriteLine("-------------------------------");
             //Console.WriteLine($"Added the new Room with id {bathroom.Id}");
 
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Getting All Rooms:");
-            Console.WriteLine();
+            Roommate newRoommate = new Roommate
+            {
+                FirstName = "Tangerine",
+                LastName = "Thomaston",
+                RentPortion = 20,
+                MoveInDate = DateTime.Now,
+                RoomId = 6
+            };
+
+            roommateRepo.Insert(newRoommate);
+
+            Console.WriteLine($"Welcome your new roommate, {newRoommate.FirstName} {newRoommate.LastName}!");
+
+            Console.WriteLine(@"----------------------------
+            Getting All Rooms:
+            ");
 
             List<Roommate> allRoommates = roommateRepo.GetAllWithRoom();
 
@@ -62,8 +75,8 @@ namespace Roommates
                 Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion} {roommate.MoveInDate} {roommate.Room.Name}");
             }
 
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Getting Roommate with Id 2");
+            Console.WriteLine(@"----------------------------
+            Getting Roommate with Id 2");
 
             Roommate singleRoommate = roommateRepo.GetById(2);
 
@@ -71,8 +84,8 @@ namespace Roommates
 
             Roommate room1Roommate = roommateRepo.GetByRoom(3);
 
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Getting Roommate in room 3");
+            Console.WriteLine(@"----------------------------
+            Getting Roommate in room 3");
 
             Console.WriteLine($"{room1Roommate.Id} {room1Roommate.FirstName} {room1Roommate.LastName} {room1Roommate.RentPortion} {room1Roommate.MoveInDate}");
         }
