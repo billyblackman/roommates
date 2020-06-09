@@ -23,22 +23,22 @@ namespace Roommates
             //roomRepo.Delete(8);
             //roomRepo.Delete(9);
 
-            //Console.WriteLine("Getting All Rooms:");
-            //Console.WriteLine();
+            Console.WriteLine("Getting All Rooms:");
+            Console.WriteLine();
 
-            //List<Room> allRooms = roomRepo.GetAll();
+            List<Room> allRooms = roomRepo.GetAll();
 
-            //foreach (Room room in allRooms)
-            //{
-            //    Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
-            //}
+            foreach (Room room in allRooms)
+            {
+                Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
+            }
 
-            //Console.WriteLine("----------------------------");
-            //Console.WriteLine("Getting Room with Id 1");
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Room with Id 1");
 
-            //Room singleRoom = roomRepo.GetById(4);
+            Room singleRoom = roomRepo.GetById(4);
 
-            //Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
+            Console.WriteLine($"{singleRoom.Id} {singleRoom.Name} {singleRoom.MaxOccupancy}");
 
             //Room bathroom = new Room
             //{
@@ -51,12 +51,30 @@ namespace Roommates
             //Console.WriteLine("-------------------------------");
             //Console.WriteLine($"Added the new Room with id {bathroom.Id}");
 
-            List<Roommate> allRoommates = roommateRepo.GetAll();
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting All Rooms:");
+            Console.WriteLine();
+
+            List<Roommate> allRoommates = roommateRepo.GetAllWithRoom();
 
             foreach (Roommate roommate in allRoommates)
             {
-                Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion} {roommate.MoveInDate}");
+                Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion} {roommate.MoveInDate} {roommate.Room.Name}");
             }
+
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Roommate with Id 2");
+
+            Roommate singleRoommate = roommateRepo.GetById(2);
+
+            Console.WriteLine($"{singleRoommate.Id} {singleRoommate.FirstName} {singleRoommate.LastName} {singleRoommate.RentPortion} {singleRoommate.MoveInDate}");
+
+            Roommate room1Roommate = roommateRepo.GetByRoom(3);
+
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Roommate in room 3");
+
+            Console.WriteLine($"{room1Roommate.Id} {room1Roommate.FirstName} {room1Roommate.LastName} {room1Roommate.RentPortion} {room1Roommate.MoveInDate}");
         }
     }
 }
